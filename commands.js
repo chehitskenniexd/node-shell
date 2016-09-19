@@ -3,6 +3,9 @@ var request = require('request');
 var bash = require('./bash');
 
 module.exports = {
+	done: function(output){
+		process.stdout.write(output + "\nprompt > ");
+	},
 	pwd: function() {
 		return process.cwd();
 	},
