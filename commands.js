@@ -1,25 +1,27 @@
 var fs = require('fs');
 var request = require('request');
+var bash = require('./bash');
 
 module.exports = {
 	pwd: function() {
-		process.stdout.write(process.cwd());
-		process.stdout.write("\nprompt > ");
+		return process.cwd();
 	},
 	date: function() {
-		process.stdout.write(new Date().toString());
-		process.stdout.write("\nprompt > ");
+		return new Date().toString();
 	},
 	ls: function() {fs.readdir('.', function(err, files) {
 		if (err) throw err;
+		var output;
 		files.forEach(function(file) {
-			process.stdout.write(file.toString() + "\n");
+			//process.stdout.write(file.toString() + "\n");
+			output += file.toString();
 		});
-		process.stdout.write("prompt > ");
-	});},
+		//process.stdout.write("prompt > ");
+		bash.done(output);
+		});
+	},
 	echo: function(words){
-		process.stdout.write(words + '\n');
-		process.stdout.write("prompt > ");		
+		return words;	
 	},
 	cat: function(filenames){
 		var files = filenames.split(' ');

@@ -1,5 +1,9 @@
 var commands = require('./commands');
 
+var done = function(output){
+    process.stdout.write(output + "\nprompt > ");
+}
+
 // Output a prompt
 process.stdout.write('prompt > ');
 
@@ -11,7 +15,7 @@ process.stdin.on('data', function (data) {
     var args = words.slice(1).join(' ');
 
     if (commands.hasOwnProperty(cmd)) {
-        commands[cmd](args);
+        done(commands[cmd](args));
     } else {
         process.stdout.write('You typed: ' + cmd);
         process.stdout.write("\nprompt > ");
